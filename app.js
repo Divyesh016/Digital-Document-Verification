@@ -316,10 +316,18 @@ const uploadedHash =
             data[2];
 
         const timestamp =
-            data[3];
+    data[3];
 
-        const exists =
-            data[4];
+const exists =
+    data[4];
+
+const registrationDate =
+    new Date(
+        Number(timestamp) * 1000
+    );
+
+const formattedDate =
+    registrationDate.toLocaleString();
 
 
         console.log(
@@ -371,56 +379,82 @@ const uploadedHash =
     "result verified";
 
     result.innerHTML = `
+    <div class="verification-success">
+
         <h2>✅ DOCUMENT VERIFIED</h2>
 
-    <p>
-        <strong>Document ID:</strong>
-        ${storedDocumentId}
-    </p>
+        <p>
+            <strong>Document ID:</strong>
+            ${storedDocumentId}
+        </p>
 
-    <p>
-        <strong>Status:</strong>
-        Original / Authentic
-    </p>
+        <p>
+            <strong>Status:</strong>
+            Original / Authentic
+        </p>
 
-    <p>
-        <strong>Issuer:</strong>
-        ${issuer}
-    </p>
+        <p>
+            <strong>Issuer:</strong>
+            ${issuer}
+        </p>
 
-    <p>
-        <strong>Blockchain Hash:</strong>
-        ${storedHash}
-    </p>
+        <p>
+            <strong>Registered On:</strong>
+            ${formattedDate}
+        </p>
+
+        <p>
+            <strong>Network:</strong>
+            Ethereum Sepolia
+        </p>
+
+        <p>
+            <strong>Blockchain Hash:</strong>
+        </p>
+
+        <div class="hash-display">
+            ${storedHash}
+        </div>
+
+    </div>
 `;
 
         } else {
 
             result.className ="result invalid";
 
-            result.innerHTML = `
-                <h2>❌ INVALID DOCUMENT</h2>
+           result.innerHTML = `
+    <div class="verification-failed">
 
-    <p>
-        <strong>Document ID:</strong>
-        ${documentId}
-    </p>
+        <h2>❌ INVALID DOCUMENT</h2>
 
-    <p>
-        The uploaded PDF has a different
-        hash from the document stored
-        on the blockchain.
-    </p>
+        <p>
+            The uploaded document does not match
+            the document registered on the blockchain.
+        </p>
 
-    <p>
-        <strong>Blockchain Hash:</strong>
-        ${storedHash}
-    </p>
+        <p>
+            <strong>Document ID:</strong>
+            ${storedDocumentId}
+        </p>
 
-    <p>
-        <strong>Uploaded Hash:</strong>
-        ${uploadedHash}
-    </p>
+        <p>
+            <strong>Registered Hash:</strong>
+        </p>
+
+        <div class="hash-display">
+            ${storedHash}
+        </div>
+
+        <p>
+            <strong>Uploaded File Hash:</strong>
+        </p>
+
+        <div class="hash-display">
+            ${uploadedHash}
+        </div>
+
+    </div>
 `;
         }
 
