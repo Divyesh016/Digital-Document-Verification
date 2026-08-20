@@ -472,20 +472,19 @@ async function registerDocument() {
 
         if (exists) {
 
-            status.innerText =
-                "⚠️ Document already registered.";
+    status.innerText =
+        "⚠️ Document already registered.";
 
-            alert(
-                "⚠️ Document Already Registered!\n\n" +
-                "Document ID: " + documentId +
-                "\n\n" +
-                "This document ID is already registered " +
-                "on the blockchain.\n\n" +
-                "Please use a different Document ID."
-            );
+    showPopup(
+        "Document Already Registered",
+        "Document ID " +
+        documentId +
+        " is already registered on the blockchain. Please use a different Document ID.",
+        "⚠️"
+    );
 
-            return;
-        }
+    return;
+}
 
 
         // --------------------------------
