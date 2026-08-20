@@ -720,8 +720,88 @@ if (!hash) {
         await transaction.wait();
 
 
-        status.innerText =
-            "✅ Document registered successfully!";
+       status.innerText =
+    "✅ Document registered successfully!";
+
+
+// Get registration details
+
+const registeredData =
+    await readContract.verifyDocument(
+        documentId
+    );
+
+const registeredIssuer =
+    registeredData[2];
+
+const registeredTimestamp =
+    registeredData[3];
+
+
+// Convert blockchain timestamp
+
+const registrationDate =
+    new Date(
+        Number(registeredTimestamp) * 1000
+    );
+
+
+// Display transaction details
+
+const transactionLink =
+    "https://sepolia.etherscan.io/tx/" +
+    transaction.hash;
+
+
+const details =
+    document.getElementById(
+        "registrationDetails"
+    );
+
+
+if (details) {
+
+    details.style.display =
+        "block";
+
+    details.innerHTML = `
+        <h2>✅ Document Registered</h2>
+
+        <p>
+            <strong>Document ID:</strong>
+            ${documentId}
+        </p>
+
+        <p>
+            <strong>Issuer:</strong>
+            ${registeredIssuer}
+        </p>
+
+        <p>
+            <strong>Registered:</strong>
+            ${registrationDate.toLocaleString()}
+        </p>
+
+        <p>
+            <strong>Network:</strong>
+            Ethereum Sepolia
+        </p>
+
+        <p>
+            <strong>Transaction:</strong><br>
+            ${transaction.hash}
+        </p>
+
+        <a
+            href="${transactionLink}"
+            target="_blank"
+            class="button">
+
+            🔗 View on Sepolia Explorer
+
+        </a>
+    `;
+}
 
 
         alert(
