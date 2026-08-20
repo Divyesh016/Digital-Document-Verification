@@ -664,3 +664,83 @@ button:active,
 
     text-align: center;
 }
+
+/* ================================
+   VERIFICATION RESULTS
+================================ */
+
+.verification-success {
+    margin-top: 30px;
+
+    padding: 25px;
+
+    border: 2px solid #22c55e;
+
+    border-radius: 16px;
+
+    background: #f0fdf4;
+}
+
+.verification-success h2 {
+    color: #15803d;
+
+    margin-bottom: 20px;
+}
+
+.verification-success p {
+    text-align: left;
+
+    margin-bottom: 12px;
+}
+
+
+/* Invalid document */
+
+.verification-failed {
+    margin-top: 30px;
+
+    padding: 25px;
+
+    border: 2px solid #ef4444;
+
+    border-radius: 16px;
+
+    background: #fef2f2;
+}
+
+.verification-failed h2 {
+    color: #dc2626;
+
+    margin-bottom: 20px;
+}
+
+.verification-failed p {
+    text-align: left;
+
+    margin-bottom: 12px;
+}
+
+
+/* Hash display */
+
+.hash-display {
+    padding: 12px;
+
+    margin: 8px 0 18px;
+
+    background: #f8fafc;
+
+    border: 1px solid #dbe2ea;
+
+    border-radius: 8px;
+
+    font-family: monospace;
+
+    font-size: 12px;
+
+    word-break: break-all;
+
+    text-align: left;
+
+    color: #334155;
+}
