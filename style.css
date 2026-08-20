@@ -579,3 +579,44 @@ button:active,
         transform: scale(1);
     }
 }
+
+/* ================================
+   REQUIRED FIELD
+================================ */
+
+.required {
+    color: #dc2626;
+}
+
+
+/* ================================
+   FIELD ERROR MESSAGE
+================================ */
+
+.field-error {
+    display: none;
+
+    text-align: left;
+
+    color: #dc2626;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    margin-top: -15px;
+
+    margin-bottom: 18px;
+}
+
+
+/* Highlight invalid input */
+
+.input-error {
+    border-color: #ef4444 !important;
+
+    background: #fff5f5 !important;
+
+    box-shadow:
+        0 0 0 3px rgba(239, 68, 68, 0.10) !important;
+}
