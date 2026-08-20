@@ -620,3 +620,47 @@ button:active,
     box-shadow:
         0 0 0 3px rgba(239, 68, 68, 0.10) !important;
 }
+
+/* ================================
+   REGISTRATION DETAILS
+================================ */
+
+.registration-details {
+    display: none;
+
+    margin-top: 25px;
+
+    padding: 25px;
+
+    background: #f0fdf4;
+
+    border: 2px solid #22c55e;
+
+    border-radius: 16px;
+
+    text-align: left;
+}
+
+.registration-details h2 {
+    text-align: center;
+
+    color: #15803d;
+
+    margin-bottom: 20px;
+}
+
+.registration-details p {
+    text-align: left;
+
+    margin-bottom: 12px;
+
+    word-break: break-word;
+}
+
+.registration-details .button {
+    margin-top: 20px;
+
+    display: block;
+
+    text-align: center;
+}
