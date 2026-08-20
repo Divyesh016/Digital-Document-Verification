@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Admin - Document Registration</title>
+
+    <link rel="stylesheet"
+          href="Style.css">
+
+</head>
+
+<body>
+    
+<div class="container">
+
+    <h1 align="center">📄 Register Document</h1>
+
+    <p align="center">
+        Admin Document Registration
+    </p>
+
+    <label>
+        Document ID
+    </label>
+
+    <input
+        type="text"
+        id="documentId"
+        placeholder="Example: DOC001"
+    >
+
+    <br><br>
+
+    <label>
+        Select PDF Document
+    </label>
+
+    <input
+        type="file"
+        id="documentFile"
+        accept=".pdf"
+    >
+
+    <br><br>
+
+<center>
+    <button 
+        class="button"
+        onclick="generateHash()">
+
+        Generate Hash
+
+    </button>
+</center>
+
+    <br>
+
+    <label>
+        Document Hash
+    </label>
+
+    <input
+        type="text"
+        id="documentHash"
+        readonly
+    >
+
+    <!-- ONLY ADDED THIS COPY BUTTON -->
+    <button
+    class="button"
+    onclick="copyHash()">
+    📋 Copy
+</button>
+
+    <br><br>
+
+<center>
+    <button
+        class="button"
+        onclick="registerDocument()">
+
+        Register on Blockchain
+
+    </button>
+</center>
+
+<div id="qrSection" class="qr-section">
+
+    <h2>📱 Document QR Code</h2>
+
+    <p>
+        Scan this QR code to verify the document.
+    </p>
+
+    <div id="qrcode"></div>
+
+    <button
+        type="button"
+        class="button"
+        onclick="downloadQRCode()">
+
+        ⬇️ Download QR Code
+
+    </button>
+
+</div>
+
+    <p id="status"></p>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/ethers@6.13.2/dist/ethers.umd.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+
+<script src="Contract.js"></script>
+
+<script src="App.js"></script> 
+ 
+</body> 
+ 
+</html>
