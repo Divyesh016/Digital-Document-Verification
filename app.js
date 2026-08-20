@@ -740,3 +740,54 @@ document.addEventListener(
     loadDocumentIdFromURL
 );
 
+function showPopup(
+    title,
+    message,
+    icon = "⚠️"
+) {
+
+    const overlay =
+        document.getElementById("popupOverlay");
+
+    const popupTitle =
+        document.getElementById("popupTitle");
+
+    const popupMessage =
+        document.getElementById("popupMessage");
+
+    const popupIcon =
+        document.getElementById("popupIcon");
+
+
+    if (!overlay) {
+        return;
+    }
+
+
+    popupTitle.innerText =
+        title;
+
+    popupMessage.innerText =
+        message;
+
+    popupIcon.innerText =
+        icon;
+
+
+    overlay.style.display =
+        "flex";
+}
+
+
+function closePopup() {
+
+    const overlay =
+        document.getElementById("popupOverlay");
+
+
+    if (overlay) {
+
+        overlay.style.display =
+            "none";
+    }
+}
