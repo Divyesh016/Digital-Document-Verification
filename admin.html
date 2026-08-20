@@ -25,27 +25,31 @@
         Admin Document Registration
     </p>
 
-    <label>
-        Document ID
-    </label>
+   <label>
+    Document ID <span class="required">*</span>
+</label>
 
-    <input
-        type="text"
-        id="documentId"
-        placeholder="Example: DOC001"
-    >
+<input
+    type="text"
+    id="documentId"
+    placeholder="Example: DOC001"
+>
+
+<p id="documentIdError" class="field-error"></p>
 
     <br><br>
 
     <label>
-        Select PDF Document
-    </label>
+    Select PDF Document <span class="required">*</span>
+</label>
 
-    <input
-        type="file"
-        id="documentFile"
-        accept=".pdf"
-    >
+<input
+    type="file"
+    id="documentFile"
+    accept=".pdf"
+>
+
+<p id="documentFileError" class="field-error"></p>
 
     <br><br>
 
