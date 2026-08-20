@@ -10,7 +10,15 @@ async function generateHash() {
         document.getElementById("status");
 
 
-    // Check if file was selected
+    if (!fileInput || !hashField || !status) {
+
+        console.error(
+            "Required HTML elements were not found."
+        );
+
+        return;
+    }
+
 
     if (fileInput.files.length === 0) {
 
@@ -28,28 +36,35 @@ async function generateHash() {
 
 
         status.innerText =
-            "⏳ Generating document hash...";
+            "⏳ Generating SHA-256 hash...";
 
-
-        // Read the PDF
 
         const fileBuffer =
             await file.arrayBuffer();
 
 
-        // Convert to Uint8Array
+        const hashBuffer =
+            await crypto.subtle.digest(
+                "SHA-256",
+                fileBuffer
+            );
 
-        const fileBytes =
-            new Uint8Array(fileBuffer);
 
+        const hashArray =
+            new Uint8Array(hashBuffer);
 
-        // Generate SHA-256 hash using ethers.js
 
         const hash =
-            ethers.sha256(fileBytes);
+            "0x" +
+            Array.from(hashArray)
+                .map(
+                    byte =>
+                        byte
+                            .toString(16)
+                            .padStart(2, "0")
+                )
+                .join("");
 
-
-        // Put hash into textbox
 
         hashField.value =
             hash;
@@ -60,13 +75,18 @@ async function generateHash() {
 
 
         console.log(
-            "File:",
+            "PDF:",
             file.name
         );
 
         console.log(
-            "SHA-256 Hash:",
+            "SHA-256:",
             hash
+        );
+
+        console.log(
+            "Hash length:",
+            hash.length
         );
 
 
@@ -79,8 +99,7 @@ async function generateHash() {
 
 
         status.innerText =
-            "❌ Could not generate hash. Check Console.";
-
+            "❌ Hash generation failed.";
     }
 }
 
@@ -144,14 +163,25 @@ async function verifyDocument() {
 
         // Convert PDF to bytes
 
-        const fileBytes =
-            new Uint8Array(fileBuffer);
+        const hashBuffer =
+    await crypto.subtle.digest(
+        "SHA-256",
+        fileBuffer
+    );
 
+const hashArray =
+    new Uint8Array(hashBuffer);
 
-        // Generate SHA-256 hash
-
-        const uploadedHash =
-            ethers.sha256(fileBytes);
+const uploadedHash =
+    "0x" +
+    Array.from(hashArray)
+        .map(
+            byte =>
+                byte
+                    .toString(16)
+                    .padStart(2, "0")
+        )
+        .join("");
 
 
         console.log(
