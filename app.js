@@ -418,8 +418,7 @@ async function registerDocument() {
 
     if (!documentId) {
 
-        status.innerText =
-            "❌ Please enter a Document ID.";
+        alert("⚠️ Please enter a Document ID.");
 
         return;
     }
@@ -427,8 +426,7 @@ async function registerDocument() {
 
     if (!hash) {
 
-        status.innerText =
-            "❌ Please generate the document hash first.";
+        alert("⚠️ Please generate the document hash first.");
 
         return;
     }
@@ -436,10 +434,72 @@ async function registerDocument() {
 
     try {
 
+        // --------------------------------
+        // STEP 1: Check blockchain
+        // --------------------------------
+
+        status.innerText =
+            "🔍 Checking whether document is already registered...";
+
+
+        const readProvider =
+            new ethers.JsonRpcProvider(
+                "https://ethereum-sepolia-rpc.publicnode.com"
+            );
+
+
+        const readContract =
+            new ethers.Contract(
+                contractAddress,
+                contractABI,
+                readProvider
+            );
+
+
+        const existingDocument =
+            await readContract.verifyDocument(
+                documentId
+            );
+
+
+        const exists =
+            existingDocument[4];
+
+
+        // --------------------------------
+        // Document already exists
+        // --------------------------------
+
+        if (exists) {
+
+            status.innerText =
+                "⚠️ Document already registered.";
+
+            alert(
+                "⚠️ Document Already Registered!\n\n" +
+                "Document ID: " + documentId +
+                "\n\n" +
+                "This document ID is already registered " +
+                "on the blockchain.\n\n" +
+                "Please use a different Document ID."
+            );
+
+            return;
+        }
+
+
+        // --------------------------------
+        // STEP 2: Check MetaMask
+        // --------------------------------
+
         if (!window.ethereum) {
 
             status.innerText =
                 "❌ MetaMask not detected.";
+
+            alert(
+                "❌ MetaMask is not installed."
+            );
 
             return;
         }
@@ -472,6 +532,10 @@ async function registerDocument() {
             );
 
 
+        // --------------------------------
+        // STEP 3: Register
+        // --------------------------------
+
         status.innerText =
             "⏳ Sending transaction to blockchain...";
 
@@ -497,18 +561,36 @@ async function registerDocument() {
 
 
         status.innerText =
-            "✅ Document registered successfully on blockchain!";
-        
+            "✅ Document registered successfully!";
+
+
+        alert(
+            "✅ Document Registered Successfully!\n\n" +
+            "Document ID: " + documentId
+        );
+
+
+        // --------------------------------
+        // STEP 4: Generate QR
+        // --------------------------------
+
+        if (typeof generateQRCode === "function") {
+
             generateQRCode(documentId);
 
-    document.getElementById(
-    "qrSection"
-        ).style.display = "block";
 
-        console.log(
-            "Confirmed transaction:",
-            transaction.hash
-        );
+            const qrSection =
+                document.getElementById(
+                    "qrSection"
+                );
+
+
+            if (qrSection) {
+
+                qrSection.style.display =
+                    "block";
+            }
+        }
 
 
     } catch (error) {
@@ -530,10 +612,13 @@ async function registerDocument() {
         } else {
 
             status.innerText =
-                "❌ Registration failed. Check browser console.";
+                "❌ Registration failed.";
 
+            alert(
+                "❌ Registration failed.\n\n" +
+                "Check the browser console for details."
+            );
         }
-
     }
 }
 
