@@ -641,17 +641,15 @@ function generateQRCode(documentId) {
 
     // Current website URL
 
-    const verificationURL =
-        window.location.origin +
-        window.location.pathname
-            .replace(
-                "Admin.html",
-                "Verify.html"
-            ) +
-        "?id=" +
-        encodeURIComponent(
-            documentId
-        );
+   const verificationURL =
+    window.location.origin +
+    window.location.pathname
+        .replace(
+            "admin.html",
+            "verify.html"
+        ) +
+    "?id=" +
+    encodeURIComponent(documentId);
 
 
     console.log(
