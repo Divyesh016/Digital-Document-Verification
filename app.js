@@ -20,13 +20,89 @@ async function generateHash() {
     }
 
 
-    if (fileInput.files.length === 0) {
+    // Clear previous errors
 
-        status.innerText =
-            "❌ Please select a PDF first.";
+document.getElementById(
+    "documentIdError"
+).style.display = "none";
 
-        return;
-    }
+document.getElementById(
+    "documentFileError"
+).style.display = "none";
+
+document.getElementById(
+    "documentId"
+).classList.remove("input-error");
+
+document.getElementById(
+    "documentFile"
+).classList.remove("input-error");
+
+
+// Check Document ID
+
+const documentId =
+    document.getElementById(
+        "documentId"
+    ).value.trim();
+
+
+// Check PDF
+
+if (!documentId) {
+
+    const error =
+        document.getElementById(
+            "documentIdError"
+        );
+
+    error.innerText =
+        "⚠️ Please enter a Document ID.";
+
+    error.style.display =
+        "block";
+
+    document.getElementById(
+        "documentId"
+    ).classList.add(
+        "input-error"
+    );
+
+    document.getElementById(
+        "documentId"
+    ).focus();
+
+    status.innerText =
+        "⚠️ Please complete the required field.";
+
+    return;
+}
+
+
+if (fileInput.files.length === 0) {
+
+    const error =
+        document.getElementById(
+            "documentFileError"
+        );
+
+    error.innerText =
+        "⚠️ Please select a PDF document.";
+
+    error.style.display =
+        "block";
+
+    document.getElementById(
+        "documentFile"
+    ).classList.add(
+        "input-error"
+    );
+
+    status.innerText =
+        "⚠️ Please select a PDF.";
+
+    return;
+}
 
 
     try {
@@ -415,7 +491,92 @@ async function registerDocument() {
     const status =
         document.getElementById("status");
 
+    const documentFile =
+    document.getElementById(
+        "documentFile"
+    );
 
+
+// Clear previous errors
+
+document.getElementById(
+    "documentIdError"
+).style.display = "none";
+
+document.getElementById(
+    "documentFileError"
+).style.display = "none";
+
+
+// Check Document ID
+
+if (!documentId) {
+
+    const error =
+        document.getElementById(
+            "documentIdError"
+        );
+
+    error.innerText =
+        "⚠️ Please enter a Document ID.";
+
+    error.style.display =
+        "block";
+
+    document.getElementById(
+        "documentId"
+    ).classList.add(
+        "input-error"
+    );
+
+    document.getElementById(
+        "documentId"
+    ).focus();
+
+    status.innerText =
+        "⚠️ Please enter the required information.";
+
+    return;
+}
+
+
+// Check PDF
+
+if (documentFile.files.length === 0) {
+
+    const error =
+        document.getElementById(
+            "documentFileError"
+        );
+
+    error.innerText =
+        "⚠️ Please select a PDF document.";
+
+    error.style.display =
+        "block";
+
+    document.getElementById(
+        "documentFile"
+    ).classList.add(
+        "input-error"
+    );
+
+    status.innerText =
+        "⚠️ Please select the PDF document.";
+
+    return;
+}
+
+
+// Check hash
+
+if (!hash) {
+
+    status.innerText =
+        "⚠️ Please generate the document hash first.";
+
+    return;
+}
     if (!documentId) {
 
         alert("⚠️ Please enter a Document ID.");
