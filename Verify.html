@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Verify Document</title>
+
+    <link rel="stylesheet" href="Style.css">
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>🔍 Verify Document</h1>
+
+    <p>
+        Check whether a digital document is authentic
+    </p>
+
+    <label>
+        Document ID
+    </label>
+
+    <input
+    type="text"
+    id="verifyDocumentId"
+    placeholder="Example: DOC001"
+    >
+
+    <br><br>
+
+    <label>
+        Select PDF Document
+    </label>
+
+    <input
+        type="file"
+        id="verifyDocumentFile"
+        accept=".pdf"
+    >
+
+    <br><br>
+
+    <button
+        class="button"
+        onclick="verifyDocument()">
+
+        Verify Document
+
+    </button>
+
+    <p id="verifyStatus"></p>
+
+    <div id="result" class="result"></div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/ethers@6.13.2/dist/ethers.umd.min.js"></script>
+
+<script src="Contract.js"></script>
+
+<script src="App.js"></script>
+
+</body>
+
+</html>
